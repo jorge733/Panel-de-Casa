@@ -10,16 +10,14 @@
 <main>
  <div class="home-column">
   <section class="clock" aria-label="Hora y fecha"><p id="greeting">Bienvenido a casa</p><time id="time"><span id="hours-minutes">--:--</span><span id="seconds">--</span></time><p id="date"></p></section>
-  <section id="recipe-card" class="recipe" hidden aria-labelledby="recipe-title"><div class="section-heading"><h2 id="recipe-title">Receta para la casa</h2><button id="close-recipe" type="button">Cerrar</button></div><p id="recipe-query"></p><div id="recipe-player"></div></section>
   <section class="home-tips" aria-labelledby="tips-title"><div class="section-heading"><h2 id="tips-title">En casa</h2><span id="tip-number" class="badge">1 / 4</span></div><p id="home-tip">Toca pantalla completa para dejar el panel listo como reloj de mesa.</p></section>
  </div>
  <div class="side">
   <section class="weather" aria-labelledby="weather-title"><div class="section-heading"><h1 id="weather-title">El tiempo</h1><span class="badge" id="weather-badge">Actualizando</span></div><div class="weather-row"><strong id="temperature">—</strong><div><p id="place">Santiago de Chile</p><p id="condition">Buscando el tiempo…</p></div></div><p class="hint" id="weather-note">Pronóstico automático para Santiago.</p><div id="forecast" class="forecast" aria-label="Pronóstico de los próximos días"></div><a class="weather-source" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Datos de Open-Meteo</a></section>
-  <section class="alexa-card" aria-labelledby="alexa-title"><div class="section-heading"><h2 id="alexa-title">Alexa y tu panel</h2><span class="badge">Echo</span></div><p>Di “Alexa, abre recetario casero” y luego pide una receta. El video aparecerá aquí.</p><button id="test-recipe" type="button">Mostrar receta de prueba</button></section>
   <section id="calendar-card" class="calendar" hidden aria-labelledby="calendar-title"><div class="section-heading"><h2 id="calendar-title">Próximos eventos</h2><button id="close-calendar" type="button">Cerrar</button></div><iframe id="calendar-frame" title="Calendario"></iframe></section>
-  <section class="quick" aria-labelledby="quick-title"><h2 id="quick-title">A un toque</h2><div id="quick-links" class="links"></div></section>
  </div>
 </main>
 <dialog id="settings-dialog"><form id="settings-form" method="dialog"><div class="section-heading"><h2>Ajustes del panel</h2><button value="cancel" type="submit">Cerrar</button></div><p class="hint">Los cambios se guardan solo en este dispositivo.</p><label>Nombre para el saludo<input id="setting-name" maxlength="30" placeholder="Ej. Familia Abarca"></label><label>Enlace de calendario público o integrable<input id="setting-calendar" type="url" placeholder="https://calendar.google.com/calendar/embed?src=…"></label><p class="hint">Google Calendar permite crear un enlace integrable desde la configuración de un calendario que hayas compartido.</p><div id="shortcut-settings" class="shortcut-settings"></div><div class="settings-actions"><button value="cancel" type="submit">Cancelar</button><button id="save-settings" value="default" type="submit">Guardar cambios</button></div></form></dialog>
 <p id="status" role="status"></p>
 </body></html>
+
