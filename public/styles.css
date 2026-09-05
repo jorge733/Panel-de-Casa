@@ -40,3 +40,7 @@
   .home-column .quick h2{font-size:13px;margin:0 0 4px}
   .home-column .links{gap:4px}.home-column .links a{min-height:32px;padding:6px 8px;font-size:11px}
 }
+
+/* El calendario se abre completo para que no se recorte */
+.calendar:not([hidden]){position:fixed;inset:8px;z-index:20;background:#17232c;border:1px solid #52636f;border-radius:20px;padding:16px;display:flex;flex-direction:column;box-shadow:0 20px 60px #000b}
+.calendar:not([hidden]) .section-heading{margin-bottom:10px}.calendar:not([hidden]) iframe{flex:1;min-height:0;max-height:none;aspect-ratio:auto}

@@ -23,3 +23,4 @@ if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catc
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { tick(); requestWakeLock(); } });
 renderShortcuts(); renderCalendar(); tick(); refreshWeather().catch(() => {}); requestWakeLock();
 setInterval(tick, 1000); setInterval(() => refreshWeather().catch(() => {}), 15 * 60 * 1000);
+
