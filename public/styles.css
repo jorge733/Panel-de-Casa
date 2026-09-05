@@ -44,3 +44,8 @@
 /* El calendario se abre completo para que no se recorte */
 .calendar:not([hidden]){position:fixed;inset:8px;z-index:20;background:#17232c;border:1px solid #52636f;border-radius:20px;padding:16px;display:flex;flex-direction:column;box-shadow:0 20px 60px #000b}
 .calendar:not([hidden]) .section-heading{margin-bottom:10px}.calendar:not([hidden]) iframe{flex:1;min-height:0;max-height:none;aspect-ratio:auto}
+
+/* Calendario bajo la hora y accesos bajo el tiempo */
+.calendar:not([hidden]){position:static;inset:auto;z-index:auto;display:block;background:#1d2a35;border:1px solid #314452;box-shadow:none;margin:8px;padding:10px}
+.calendar:not([hidden]) iframe{display:block;width:100%;height:170px;min-height:0;max-height:none;aspect-ratio:auto}.calendar:not([hidden]) .section-heading{margin-bottom:7px}
+@media (orientation:landscape){.home-column{display:flex;align-content:normal}.home-column .calendar:not([hidden]){margin:4px 8px 0}.calendar:not([hidden]) iframe{height:130px}.side>.quick{display:block;padding:0}.side>.quick h2{margin:5px 0}.side>.quick .links{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.side>.quick .links a{min-height:34px;padding:6px 8px;font-size:12px}.side>.quick .links a span{display:none}}

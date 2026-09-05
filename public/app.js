@@ -39,3 +39,6 @@ function renderShortcuts(){
   }));
 }
 function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').hidden=true;if(url)$('calendar-frame').src=url;}
+
+function renderShortcuts(){const list=$('quick-links');list.replaceChildren(...config.shortcuts.map(([name,url],index)=>{const link=document.createElement('a');link.href=safeUrl(url)||'#';link.target='_blank';link.rel='noopener noreferrer';link.innerHTML=`<span>${String(index+1).padStart(2,'0')}</span>${name||'Acceso'} <b>↗</b>`;return link;}));}
+function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').hidden=!url;if(url)$('calendar-frame').src=url;}
