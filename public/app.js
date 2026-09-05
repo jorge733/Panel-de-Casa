@@ -1,0 +1,13 @@
+'use strict';
+const $ = id => document.getElementById(id);
+const storageKey = 'panel-casa-settings-v1';
+let config = {city:'',temperature:'',condition:''};
+try { const saved=JSON.parse(localStorage.getItem(storageKey)); if(saved && typeof saved==='object'){for(const key of Object.keys(config)){if(typeof saved[key]==='string')config[key]=saved[key];}} } catch { /* El panel funciona sin almacenamiento. */ }
+function tick(){const now=new Date();$('time').textContent=new Intl.DateTimeFormat('es',{hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(now);$('time').dateTime=now.toISOString();$('date').textContent=new Intl.DateTimeFormat('es',{weekday:'long',day:'numeric',month:'long'}).format(now);const hour=now.getHours();$('greeting').textContent=hour<6?'Buenas noches':hour<12?'Buenos días':hour<20?'Buenas tardes':'Buenas noches';}
+function renderWeather(){$('place').textContent=config.city||'Tu ciudad';$('temperature').textContent=config.temperature!==''&&Number.isFinite(Number(config.temperature))?`${Number(config.temperature)}°`:'—';$('condition').textContent=config.condition||'Sin configurar';$('weather-note').textContent=config.temperature!==''?'Dato manual · No se actualiza automáticamente.':'Configura el clima provisional en Ajustes.';}
+$('settings').addEventListener('click',()=>{$('city-input').value=config.city;$('temp-input').value=config.temperature;$('condition-input').value=config.condition;$('dialog').showModal();});
+$('close').addEventListener('click',()=>$('dialog').close());
+$('form').addEventListener('submit',event=>{event.preventDefault();config={city:$('city-input').value.trim(),temperature:$('temp-input').value,condition:$('condition-input').value.trim()};try{localStorage.setItem(storageKey,JSON.stringify(config));$('status').textContent='Ajustes guardados.';}catch{$('status').textContent='Cambios aplicados. Este navegador no permite guardarlos al cerrar.';}renderWeather();$('dialog').close();});
+$('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else $('status').textContent='Este navegador no permite activar pantalla completa desde el panel.';}catch{$('status').textContent='No se pudo activar la pantalla completa en este navegador.';}});
+document.addEventListener('fullscreenchange',()=>{$('fullscreen').textContent=document.fullscreenElement?'Salir de pantalla completa':'Pantalla completa';});
+tick();renderWeather();setInterval(tick,1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick();});

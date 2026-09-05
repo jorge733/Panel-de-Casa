@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101820"><title>Panel de casa</title><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script></head>
+<body>
+<header><span class="brand"><span class="dot"></span> CASA</span><div><button id="fullscreen" type="button">Pantalla completa</button><button id="settings" type="button">Ajustes</button></div></header>
+<main>
+ <section class="clock" aria-label="Hora y fecha"><p id="greeting">Bienvenido a casa</p><time id="time">--:--</time><p id="date"></p><span class="clock-note">Un momento para estar en casa.</span></section>
+ <div class="side"><section class="weather" aria-labelledby="weather-title"><div class="section-heading"><h1 id="weather-title">El tiempo</h1><span class="badge">Manual</span></div><div class="weather-row"><strong id="temperature">—</strong><div><p id="place">Tu ciudad</p><p id="condition">Sin configurar</p></div></div><p class="hint" id="weather-note">Configura el clima provisional en Ajustes.</p></section>
+ <section class="quick" aria-labelledby="quick-title"><h2 id="quick-title">A un toque</h2><div class="links"><a href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer"><span>01</span>Calendario <b>↗</b></a><a href="https://keep.google.com/" target="_blank" rel="noopener noreferrer"><span>02</span>Notas <b>↗</b></a><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><span>03</span>YouTube <b>↗</b></a></div></section></div>
+</main>
+<p id="status" role="status"></p>
+<dialog id="dialog"><form id="form"><div class="section-heading"><h2>Tu panel</h2><button type="button" id="close" aria-label="Cerrar ajustes">✕</button></div><p class="hint">Clima manual, sin actualización automática.</p><label>Ciudad<input id="city-input" maxlength="60" placeholder="Tu ciudad"></label><label>Temperatura (°C)<input id="temp-input" type="number" min="-80" max="60" step="0.1" placeholder="Sin dato"></label><label>Estado del tiempo<input id="condition-input" maxlength="70" placeholder="Por ejemplo: Despejado"></label><button class="save" type="submit">Guardar cambios</button><p class="hint">Se guardan solo en este navegador. La hora sigue la del dispositivo.</p></form></dialog>
+</body></html>
