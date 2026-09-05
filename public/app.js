@@ -2,6 +2,36 @@
 
 const $ = id => document.getElementById(id);
 const spotifyStorageKey = 'panel-casa-spotify-v1';
+const firebaseCommandUrl = 'https://panel-casa-alexa-default-rtdb.firebaseio.com/commands.json';
+const recipeStorageKey = 'panel-casa-last-recipe-command';
+
+function showRecipe(query, timestamp) {
+  const cleaned = String(query || '').trim().slice(0, 100);
+  if (!cleaned) return;
+  const frame = document.createElement('iframe');
+  frame.title = `Videos de recetas de ${cleaned}`;
+  frame.src = `https://www.youtube.com/embed?listType=search&list=${encodeURIComponent(`recetas de ${cleaned}`)}`;
+  frame.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+  frame.setAttribute('allowfullscreen', '');
+  $('recipe-query').textContent = `Buscando videos de recetas de ${cleaned}`;
+  $('recipe-player').replaceChildren(frame);
+  $('recipe-card').hidden = false;
+  try { localStorage.setItem(recipeStorageKey, String(timestamp)); } catch { /* El panel seguirá mostrando la búsqueda actual. */ }
+}
+
+async function checkAlexaRecipe() {
+  try {
+    const response = await fetch(firebaseCommandUrl, { cache: 'no-store' });
+    if (!response.ok) return;
+    const command = await response.json();
+    if (!command || !command.query || !Number.isFinite(command.timestamp)) return;
+    let previous = null;
+    try { previous = localStorage.getItem(recipeStorageKey); } catch { /* Se puede seguir sin memoria local. */ }
+    if (String(command.timestamp) !== previous) showRecipe(command.query, command.timestamp);
+  } catch { /* La conexión con Alexa no debe interrumpir el panel. */ }
+}
+
+$('close-recipe').addEventListener('click', () => { $('recipe-card').hidden = true; });
 
 function spotifyLink(value) {
   let url;
@@ -128,6 +158,8 @@ function registerWebMcp() {
 tick();
 refreshWeather().catch(() => {});
 registerWebMcp();
+checkAlexaRecipe();
 setInterval(tick, 1000);
 setInterval(() => { refreshWeather().catch(() => {}); }, 15 * 60 * 1000);
+setInterval(checkAlexaRecipe, 5000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });

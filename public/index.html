@@ -6,6 +6,11 @@
 <main>
  <div class="home-column">
  <section class="clock" aria-label="Hora y fecha"><p id="greeting">Bienvenido a casa</p><time id="time"><span id="hours-minutes">--:--</span><span id="seconds">--</span></time><p id="date"></p></section>
+ <section id="recipe-card" class="recipe" hidden aria-labelledby="recipe-title">
+  <div class="section-heading"><h2 id="recipe-title">Receta pedida a Alexa</h2><button id="close-recipe" type="button">Cerrar</button></div>
+  <p id="recipe-query"></p>
+  <div id="recipe-player"></div>
+ </section>
  <section class="music" aria-labelledby="music-title">
   <div class="section-heading"><h2 id="music-title">Tu música · Spotify</h2><a id="spotify-open" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Abrir Spotify ↗</a></div>
   <div id="spotify-player"></div>
