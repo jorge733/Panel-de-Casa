@@ -5,25 +5,14 @@
 <header><span class="brand"><span class="dot"></span> CASA</span><div><button id="fullscreen" type="button">Pantalla completa</button><button id="refresh-weather" type="button">Actualizar clima</button></div></header>
 <main>
  <div class="home-column">
- <section class="clock" aria-label="Hora y fecha"><p id="greeting">Bienvenido a casa</p><time id="time"><span id="hours-minutes">--:--</span><span id="seconds">--</span></time><p id="date"></p></section>
- <section id="recipe-card" class="recipe" hidden aria-labelledby="recipe-title">
-  <div class="section-heading"><h2 id="recipe-title">Receta pedida a Alexa</h2><button id="close-recipe" type="button">Cerrar</button></div>
-  <p id="recipe-query"></p>
-  <div id="recipe-player"></div>
- </section>
- <section class="music" aria-labelledby="music-title">
-  <div class="section-heading"><h2 id="music-title">Tu música · Spotify</h2><a id="spotify-open" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">Abrir Spotify ↗</a></div>
-  <div id="spotify-player"></div>
-  <details id="spotify-settings" open><summary>Elegir música</summary>
-   <form id="spotify-form"><label for="spotify-url">Enlace de playlist, álbum o canción</label><div class="music-input-row"><input id="spotify-url" type="url" required placeholder="https://open.spotify.com/playlist/…" autocomplete="off" spellcheck="false"><button type="submit">Cargar</button></div></form>
-   <p class="hint">En Spotify: Compartir → Copiar enlace. Tu elección se guarda en este navegador.</p>
-  </details>
-  <p id="spotify-message" role="status"></p>
-  <p class="music-help">Pulsa ▶ en el reproductor. Si solo suenan fragmentos, abre Spotify para continuar allí.</p>
- </section>
+  <section class="clock" aria-label="Hora y fecha"><p id="greeting">Bienvenido a casa</p><time id="time"><span id="hours-minutes">--:--</span><span id="seconds">--</span></time><p id="date"></p><p class="day-note" id="day-note"></p></section>
+  <section id="recipe-card" class="recipe" hidden aria-labelledby="recipe-title"><div class="section-heading"><h2 id="recipe-title">Receta</h2><button id="close-recipe" type="button">Cerrar</button></div><p id="recipe-query"></p><div id="recipe-player"></div></section>
+  <section class="home-tips" aria-labelledby="tips-title"><div class="section-heading"><h2 id="tips-title">En casa</h2><span id="tip-number" class="badge">1 / 4</span></div><p id="home-tip">Toca pantalla completa para dejar el panel listo como reloj de mesa.</p></section>
  </div>
- <div class="side"><section class="weather" aria-labelledby="weather-title"><div class="section-heading"><h1 id="weather-title">El tiempo</h1><span class="badge" id="weather-badge">Actualizando</span></div><div class="weather-row"><strong id="temperature">—</strong><div><p id="place">Santiago de Chile</p><p id="condition">Buscando el tiempo…</p></div></div><p class="hint" id="weather-note">Pronóstico automático para Santiago.</p><a class="weather-source" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Datos de Open-Meteo</a></section>
- <section class="quick" aria-labelledby="quick-title"><h2 id="quick-title">A un toque</h2><div class="links"><a href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer"><span>01</span>Calendario <b>↗</b></a><a href="https://keep.google.com/" target="_blank" rel="noopener noreferrer"><span>02</span>Notas <b>↗</b></a><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><span>03</span>YouTube <b>↗</b></a><a href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer"><span>04</span>Spotify <b>↗</b></a></div></section></div>
+ <div class="side">
+  <section class="weather" aria-labelledby="weather-title"><div class="section-heading"><h1 id="weather-title">El tiempo</h1><span class="badge" id="weather-badge">Actualizando</span></div><div class="weather-row"><strong id="temperature">—</strong><div><p id="place">Santiago de Chile</p><p id="condition">Buscando el tiempo…</p></div></div><p class="hint" id="weather-note">Pronóstico automático para Santiago.</p><div id="forecast" class="forecast" aria-label="Pronóstico de los próximos días"></div><a class="weather-source" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Datos de Open-Meteo</a></section>
+  <section class="quick" aria-labelledby="quick-title"><h2 id="quick-title">A un toque</h2><div class="links"><a href="https://calendar.google.com/" target="_blank" rel="noopener noreferrer"><span>01</span>Calendario <b>↗</b></a><a href="https://keep.google.com/" target="_blank" rel="noopener noreferrer"><span>02</span>Notas <b>↗</b></a><a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><span>03</span>YouTube <b>↗</b></a><a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer"><span>04</span>Mapas <b>↗</b></a></div></section>
+ </div>
 </main>
 <p id="status" role="status"></p>
 </body></html>
