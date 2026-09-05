@@ -62,3 +62,8 @@
   .side>.quick .links{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
   .side>.quick .links a{min-height:42px;padding:9px 11px;font-size:13px}
 }
+
+/* Diseño principal: hora y accesos a la izquierda; clima y calendario a la derecha */
+.calendar:not([hidden]){position:static;inset:auto;z-index:auto;display:block;background:#1d2a35;border:1px solid #314452;box-shadow:none;margin:0;padding:12px}.calendar:not([hidden]) iframe{height:145px;min-height:0;max-height:none;aspect-ratio:auto}.calendar:not([hidden]) .section-heading{margin-bottom:8px}.calendar .section-heading>div{display:flex;gap:6px}.calendar button{min-height:32px;padding:5px 8px;font-size:12px}
+.calendar.is-expanded{position:fixed!important;inset:8px!important;z-index:30!important;display:flex!important;flex-direction:column!important;background:#17232c!important;padding:16px!important}.calendar.is-expanded iframe{flex:1;height:auto!important;min-height:0}.calendar.is-expanded #expand-calendar{display:none}
+@media (orientation:landscape){.home-column{justify-content:flex-start;padding-top:10px}.home-column .quick{display:block!important;padding:0 8px;margin-top:4px}.home-column .links{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.home-column .links a{min-height:34px;padding:7px 9px;font-size:12px}.side{justify-content:flex-start;padding-top:18px;gap:8px}.side>.quick{display:none}.calendar:not([hidden]) iframe{height:115px}.calendar:not([hidden]){padding:9px}}
