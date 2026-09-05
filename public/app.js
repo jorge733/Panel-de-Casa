@@ -1,6 +1,48 @@
 'use strict';
 
 const $ = id => document.getElementById(id);
+const spotifyStorageKey = 'panel-casa-spotify-v1';
+
+function spotifyLink(value) {
+  let url;
+  try { url = new URL(value.trim()); } catch { throw new Error('Pega el enlace completo desde Compartir → Copiar enlace en Spotify.'); }
+  if (url.protocol !== 'https:' || url.hostname !== 'open.spotify.com' || url.port || url.username || url.password) {
+    throw new Error('Usa un enlace de open.spotify.com. Si tienes un enlace corto, ábrelo y copia la dirección completa.');
+  }
+  const match = url.pathname.match(/^\/(?:intl-[a-z-]+\/)?(?:embed\/)?(playlist|album|track|artist|episode|show)\/([A-Za-z0-9]{22})\/?$/);
+  if (!match) throw new Error('Elige una playlist, álbum o canción de Spotify y copia su enlace.');
+  return { page: `https://open.spotify.com/${match[1]}/${match[2]}`, embed: `https://open.spotify.com/embed/${match[1]}/${match[2]}?theme=0` };
+}
+
+function loadSpotify(value, save = true) {
+  const link = spotifyLink(value);
+  const frame = document.createElement('iframe');
+  frame.title = 'Reproductor de Spotify';
+  frame.src = link.embed;
+  frame.setAttribute('allow', 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture');
+  frame.setAttribute('allowfullscreen', '');
+  $('spotify-player').replaceChildren(frame);
+  $('spotify-open').href = link.page;
+  $('spotify-url').value = link.page;
+  $('spotify-settings').open = false;
+  $('spotify-settings').querySelector('summary').textContent = 'Cambiar música';
+  $('spotify-message').textContent = '';
+  if (save) {
+    try { localStorage.setItem(spotifyStorageKey, link.page); }
+    catch { $('spotify-message').textContent = 'Música cargada. Este navegador no permite recordar la selección al cerrar.'; }
+  }
+}
+
+$('spotify-form').addEventListener('submit', event => {
+  event.preventDefault();
+  try { loadSpotify($('spotify-url').value); }
+  catch (error) { $('spotify-message').textContent = error.message; }
+});
+try {
+  const savedSpotify = localStorage.getItem(spotifyStorageKey);
+  if (savedSpotify) loadSpotify(savedSpotify, false);
+} catch { /* El panel funciona aunque no se pueda leer la preferencia. */ }
+
 const weatherUrl = 'https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current=temperature_2m,apparent_temperature,weather_code&timezone=America%2FSantiago';
 const weatherLabels = {
   0: 'Despejado', 1: 'Mayormente despejado', 2: 'Parcialmente nublado', 3: 'Nublado',

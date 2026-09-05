@@ -14,6 +14,12 @@ El reloj usa la hora y zona horaria del dispositivo e incluye segundos. El clima
 
 La versión local permite usar el reloj sin conexión; el clima automático requiere conexión. Pantalla completa depende del navegador y no impide por sí sola que Android apague la pantalla.
 
+## Spotify integrado
+
+En Spotify, abre una playlist, álbum o canción y elige Compartir → Copiar enlace. Pega el enlace en “Tu música · Spotify” y pulsa “Cargar”. El reproductor oficial aparece dentro del panel; inicia la reproducción con su botón ▶. La selección se recuerda únicamente en ese navegador y puedes cambiarla con “Cambiar música”. No se suben canciones ni credenciales al repositorio.
+
+Se admiten enlaces completos de open.spotify.com, incluidos enlaces con idioma o parámetros de compartir. Si recibes un enlace corto, ábrelo y copia la dirección completa. Spotify puede limitar la reproducción a fragmentos según la sesión, contenido y navegador; “Abrir Spotify” permite continuar en su servicio. Se requiere conexión a internet.
+
 ## Próximos pasos
 
 1. Probar el tamaño del reloj y los botones en el Moto G34, en horizontal.
