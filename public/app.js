@@ -43,5 +43,8 @@ function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').
 function renderShortcuts(){const list=$('quick-links');list.replaceChildren(...config.shortcuts.map(([name,url],index)=>{const link=document.createElement('a');link.href=safeUrl(url)||'#';link.target='_blank';link.rel='noopener noreferrer';link.innerHTML=`<span>${String(index+1).padStart(2,'0')}</span>${name||'Acceso'} <b>↗</b>`;return link;}));}
 function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').hidden=!url;if(url)$('calendar-frame').src=url;}
 
-expand-calendar.addEventListener('click',()=>{ calendar-card.classList.toggle('is-expanded'); expand-calendar.textContent=calendar-card.classList.contains('is-expanded')?'Reducir':'Ampliar'; });
-
+$('expand-calendar').addEventListener('click', () => {
+  const calendar = $('calendar-card');
+  calendar.classList.toggle('is-expanded');
+  $('expand-calendar').textContent = calendar.classList.contains('is-expanded') ? 'Reducir' : 'Ampliar';
+});
