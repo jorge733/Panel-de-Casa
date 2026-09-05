@@ -1,7 +1,7 @@
 'use strict';
 const $=id=>document.getElementById(id),settingsKey='panel-casa-settings-v2';
 const weatherLabels={0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',48:'Niebla con escarcha',51:'Llovizna leve',53:'Llovizna',55:'Llovizna intensa',61:'Lluvia leve',63:'Lluvia',65:'Lluvia intensa',80:'Chubascos leves',81:'Chubascos',82:'Chubascos fuertes',95:'Tormenta'};
-const weatherUrl='https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current=temperature_2m,apparent_temperature,weather_code&daily=weather_code,temperature_2m_max&timezone=America%2FSantiago';
+const weatherUrl='https://api.open-meteo.com/v1/forecast?latitude=-33.4569&longitude=-70.6483&current=temperature_2m,apparent_temperature,weather_code&daily=weather_code,temperature_2m_max,sunrise,sunset&timezone=America%2FSantiago';
 const defaults={name:'',calendar:'',shortcuts:[['Calendario','https://calendar.google.com/'],['Notas','https://keep.google.com/'],['YouTube','https://www.youtube.com/'],['Mapas','https://www.google.com/maps']]},tips=['Toca pantalla completa para dejar el panel listo como reloj de mesa.','La pantalla se mantiene activa mientras el panel está visible.','Usa Ajustes para cambiar tus accesos rápidos y agregar un calendario.','Usa Ajustes para cambiar tus accesos rápidos y agregar un calendario.'];let config=loadConfig(),wakeLock,deferredInstall;
 function loadConfig(){try{return {...defaults,...JSON.parse(localStorage.getItem(settingsKey)||'{}')};}catch{return {...defaults};}}function safeUrl(value){try{const url=new URL(value);return url.protocol==='https:'?url.href:'';}catch{return '';}}
 function renderShortcuts(){const list=$('quick-links');list.replaceChildren(...config.shortcuts.map(([name,url],index)=>{const link=document.createElement('a');link.href=safeUrl(url)||'#';link.target='_blank';link.rel='noopener noreferrer';link.innerHTML=`<span>${String(index+1).padStart(2,'0')}</span>${name||'Acceso'} <b>↗</b>`;return link;}));}function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').hidden=!url;if(url)$('calendar-frame').src=url;}
@@ -69,3 +69,13 @@ function updateNightMode(){
 $('night-mode').addEventListener('click',()=>{const active=document.body.classList.contains('night-mode');localStorage.setItem('panel-casa-night',active?'off':'on');updateNightMode();});
 updateNightMode();
 
+
+var solarCycle;
+function updateNightMode(){
+  const now=Date.now();
+  const night=solarCycle ? now<solarCycle.sunrise||now>=solarCycle.sunset : new Date().getHours()>=21||new Date().getHours()<7;
+  document.body.classList.toggle('night-mode',night);
+  $('night-mode').textContent=night?'Modo día':'Modo noche';
+}
+$('night-mode').addEventListener('click',()=>{document.body.classList.toggle('night-mode');$('night-mode').textContent=document.body.classList.contains('night-mode')?'Modo día':'Modo noche';});
+setInterval(updateNightMode,60*1000);
