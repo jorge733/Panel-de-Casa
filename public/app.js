@@ -24,3 +24,18 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) { ti
 renderShortcuts(); renderCalendar(); tick(); refreshWeather().catch(() => {}); requestWakeLock();
 setInterval(tick, 1000); setInterval(() => refreshWeather().catch(() => {}), 15 * 60 * 1000);
 
+
+function renderShortcuts(){
+  const list=$('quick-links');
+  list.replaceChildren(...config.shortcuts.map(([name,url],index)=>{
+    const link=document.createElement('a');
+    const calendarUrl=safeUrl(config.calendar);
+    if(index===0&&calendarUrl){
+      link.href='#';
+      link.addEventListener('click',event=>{event.preventDefault();$('calendar-card').hidden=false;});
+    }else{link.href=safeUrl(url)||'#';link.target='_blank';link.rel='noopener noreferrer';}
+    link.innerHTML=`<span>${String(index+1).padStart(2,'0')}</span>${name||'Acceso'} <b>↗</b>`;
+    return link;
+  }));
+}
+function renderCalendar(){const url=safeUrl(config.calendar);$('calendar-card').hidden=true;if(url)$('calendar-frame').src=url;}
