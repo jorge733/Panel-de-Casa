@@ -75,3 +75,8 @@ body.night-mode::after{content:"";position:fixed;inset:0;background:#000b;pointe
 
 /* La tarjeta del calendario queda siempre bajo el clima */
 .side .calendar{display:block!important;visibility:visible!important}
+
+/* Calendario compacto navegable y ampliación completa */
+.calendar:not([hidden]) iframe{height:170px;overflow:auto}.calendar{overflow:auto}.calendar.is-expanded{inset:0!important;width:100vw!important;height:100svh!important;border-radius:0!important;z-index:300!important;margin:0!important;padding:18px!important}.calendar.is-expanded iframe{width:100%!important;height:calc(100svh - 70px)!important;max-height:none!important;flex:none!important}
+#settings-dialog select{width:100%;background:#101820;border:1px solid #667984;border-radius:10px;color:#eff4f6;padding:12px;font:inherit}
+body[data-theme="azul"]{background:#0c1b2a}body[data-theme="azul"] .weather{background:#a8d9f5;color:#102130}body[data-theme="calido"]{background:#241711}body[data-theme="calido"] .weather{background:#f0c88f;color:#30200e}body[data-clock="grande"] #time{font-size:clamp(78px,14vw,185px)}body[data-clock="compacto"] #time{font-size:clamp(58px,10vw,130px)}

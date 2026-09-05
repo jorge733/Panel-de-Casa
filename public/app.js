@@ -86,3 +86,20 @@ function renderCalendar(){
   $('calendar-frame').hidden=!url;
   if(url)$('calendar-frame').src=url;
 }
+
+function applyPreferences(){
+  document.body.dataset.theme=config.theme||'verde';
+  document.body.dataset.clock=config.clock||'normal';
+}
+$('settings').addEventListener('click',()=>{
+  $('setting-theme').value=config.theme||'verde';
+  $('setting-clock').value=config.clock||'normal';
+});
+$('settings-form').addEventListener('submit',event=>{
+  if(event.submitter?.id!=='save-settings')return;
+  config.theme=$('setting-theme').value;
+  config.clock=$('setting-clock').value;
+  try{localStorage.setItem(settingsKey,JSON.stringify(config));}catch{}
+  applyPreferences();
+});
+applyPreferences();
