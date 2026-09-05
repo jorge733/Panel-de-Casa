@@ -14,7 +14,6 @@
   .home-tips{display:none}.weather{padding:12px 16px}.weather-row{margin:3px 0;gap:16px}.weather-row strong{font-size:clamp(42px,6vw,62px)}#place{font-size:16px}.weather-row p{font-size:14px}.forecast{margin-top:7px;gap:5px}.forecast-day{padding:5px 7px}.forecast-day span,.forecast-day em{font-size:10px}.forecast-day strong{font-size:14px}.weather-source{margin-top:5px}
   .side{gap:7px}
   .quick{padding:3px 0}.quick h2{margin-bottom:5px}.links{grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.links a{min-height:36px;padding:7px 9px;font-size:12px;gap:5px}.links a span{display:none}
-  .recipe{margin:0;padding:10px;overflow:hidden}.recipe iframe{min-height:0;max-height:calc(100svh - 135px)}
   .calendar{padding:8px}.calendar iframe{min-height:0;max-height:190px}
   #status{display:none}
 }
@@ -29,4 +28,5 @@
   .side{justify-content:flex-start;padding-top:18px}
 }
 @media (min-width:650px){.home-column .quick{display:block}.side>.quick{display:none}}
+
 
