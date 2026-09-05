@@ -71,3 +71,18 @@ function updateNightMode(){
 $('night-mode').addEventListener('click',()=>{document.body.classList.toggle('night-mode');$('night-mode').textContent=document.body.classList.contains('night-mode')?'Modo día':'Modo noche';});
 updateNightMode();setInterval(updateNightMode,60*1000);
 
+
+function calendarUrl(value){
+  const text=String(value||'').trim();
+  const embedded=text.match(/src=["']([^"']+)/i);
+  return safeUrl(embedded?embedded[1]:text);
+}
+function renderCalendar(){
+  const url=calendarUrl(config.calendar);
+  const card=$('calendar-card');
+  card.hidden=false;
+  $('calendar-message').hidden=Boolean(url);
+  $('calendar-message').textContent=url?'':'Agrega el enlace o el código para insertar de Google Calendar desde Ajustes.';
+  $('calendar-frame').hidden=!url;
+  if(url)$('calendar-frame').src=url;
+}

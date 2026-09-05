@@ -72,3 +72,6 @@
 .calendar:not([hidden]){display:block}.calendar #calendar-message{margin:10px 0}.calendar:not([hidden]) iframe[hidden]{display:none}
 @media (orientation:landscape){.side{display:grid;grid-template-rows:auto minmax(0,1fr);justify-content:stretch;overflow:visible}.calendar:not([hidden]){min-height:0;height:100%;margin:0}.calendar:not([hidden]) iframe{height:calc(100% - 42px);min-height:90px}.calendar #calendar-message{font-size:12px}}
 body.night-mode::after{content:"";position:fixed;inset:0;background:#000b;pointer-events:none;z-index:100}body.night-mode{background:#05080a}.night-mode .weather{background:#6e8b78;color:#101813}.night-mode .dot{background:#d79b5c;box-shadow:0 0 16px #d79b5c}
+
+/* La tarjeta del calendario queda siempre bajo el clima */
+.side .calendar{display:block!important;visibility:visible!important}
