@@ -62,9 +62,10 @@ function renderCalendar(){
 }
 function updateNightMode(){
   const hour=new Date().getHours();
-  const night=localStorage.getItem('panel-casa-night')==='on'||(localStorage.getItem('panel-casa-night')!=='off'&&(hour>=22||hour<7));
+  const night=localStorage.getItem('panel-casa-night')==='on'||(localStorage.getItem('panel-casa-night')!=='off'&&(hour>=21||hour<7));
   document.body.classList.toggle('night-mode',night);
   $('night-mode').textContent=night?'Modo día':'Modo noche';
 }
 $('night-mode').addEventListener('click',()=>{const active=document.body.classList.contains('night-mode');localStorage.setItem('panel-casa-night',active?'off':'on');updateNightMode();});
 updateNightMode();
+
