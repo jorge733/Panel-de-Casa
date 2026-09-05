@@ -52,3 +52,19 @@ $('expand-calendar').addEventListener('click', () => {
   $('expand-calendar').textContent = calendar.classList.contains('is-expanded') ? 'Reducir' : 'Ampliar';
 });
 
+
+function renderCalendar(){
+  const url=safeUrl(config.calendar);
+  $('calendar-card').hidden=false;
+  $('calendar-message').hidden=Boolean(url);
+  $('calendar-frame').hidden=!url;
+  if(url)$('calendar-frame').src=url;
+}
+function updateNightMode(){
+  const hour=new Date().getHours();
+  const night=localStorage.getItem('panel-casa-night')==='on'||(localStorage.getItem('panel-casa-night')!=='off'&&(hour>=22||hour<7));
+  document.body.classList.toggle('night-mode',night);
+  $('night-mode').textContent=night?'Modo día':'Modo noche';
+}
+$('night-mode').addEventListener('click',()=>{const active=document.body.classList.contains('night-mode');localStorage.setItem('panel-casa-night',active?'off':'on');updateNightMode();});
+updateNightMode();
