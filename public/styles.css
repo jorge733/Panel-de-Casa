@@ -86,3 +86,16 @@ body[data-theme="azul"]{background:#0c1b2a}body[data-theme="azul"] .weather{back
 .side .calendar:not([hidden]){display:flex!important;flex-direction:column;min-height:0;overflow:hidden}
 .side .calendar:not([hidden]) iframe{flex:1 1 auto!important;height:auto!important;min-height:0!important;overflow:auto;touch-action:pan-y;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 @media (orientation:portrait){.side .calendar:not([hidden]) iframe{min-height:220px!important}}
+
+/* En vista compacta se puede recorrer toda la página, incluido el calendario. */
+@media (orientation:landscape){
+  html,body{height:auto;min-height:100svh;overflow-x:hidden;overflow-y:auto}
+  body{min-height:100svh}
+  main{height:auto;min-height:calc(100svh - 56px);overflow:visible}
+  .home-column,.side{overflow:visible}
+  .side{grid-template-rows:auto auto}
+  .side .calendar:not([hidden]){height:auto;min-height:0;overflow:visible}
+  .side .calendar:not([hidden]) iframe{height:420px!important;min-height:420px!important;flex:none!important}
+  .side .calendar.is-expanded{height:100svh!important;overflow:hidden}
+  .side .calendar.is-expanded iframe{height:calc(100svh - 70px)!important;min-height:0!important}
+}
