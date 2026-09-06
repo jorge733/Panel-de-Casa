@@ -103,3 +103,33 @@ $('settings-form').addEventListener('submit',event=>{
   applyPreferences();
 });
 applyPreferences();
+
+// La selección manual tiene prioridad sobre el horario automático.
+function persistConfiguration(){
+  try { localStorage.setItem(settingsKey, JSON.stringify(config)); } catch {}
+}
+function updateNightMode(){
+  const selectedMode=config.nightMode||'auto';
+  const automaticNight=solarCycle
+    ? Date.now()<solarCycle.sunrise||Date.now()>=solarCycle.sunset
+    : new Date().getHours()>=21||new Date().getHours()<7;
+  const night=selectedMode==='night'||(selectedMode==='auto'&&automaticNight);
+  document.body.classList.toggle('night-mode',night);
+  $('night-mode').textContent=night?'Modo día':'Modo noche';
+}
+$('night-mode').addEventListener('click',()=>{
+  config.nightMode=document.body.classList.contains('night-mode')?'night':'day';
+  persistConfiguration();
+  updateNightMode();
+});
+$('settings').addEventListener('click',()=>{
+  $('setting-night').value=config.nightMode||'auto';
+});
+$('settings-form').addEventListener('submit',event=>{
+  if(event.submitter?.id!=='save-settings') return;
+  config.nightMode=$('setting-night').value;
+  persistConfiguration();
+  updateNightMode();
+});
+updateNightMode();
+
