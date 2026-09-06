@@ -15,8 +15,13 @@ $('settings').addEventListener('click', openSettings);
 $('settings-form').addEventListener('submit', event => { if (event.submitter?.id === 'save-settings') saveSettings(); });
 $('refresh-weather').addEventListener('click', () => refreshWeather().catch(() => {}));
 $('close-calendar').addEventListener('click', () => {
-  $('calendar-card').classList.remove('is-expanded');
-  $('expand-calendar').textContent = 'Ampliar';
+  const calendar = $('calendar-card');
+  if (calendar.classList.contains('is-expanded')) {
+    calendar.classList.remove('is-expanded');
+    $('expand-calendar').textContent = 'Ampliar';
+  } else {
+    calendar.hidden = true;
+  }
 });
 $('fullscreen').addEventListener('click', async () => { try { if (document.fullscreenElement) await document.exitFullscreen(); else await document.documentElement.requestFullscreen(); } catch { $('status').textContent = 'No se pudo activar la pantalla completa.'; } });
 document.addEventListener('fullscreenchange', () => { $('fullscreen').textContent = document.fullscreenElement ? 'Salir de pantalla completa' : 'Pantalla completa'; });
@@ -133,3 +138,18 @@ $('settings-form').addEventListener('submit',event=>{
 });
 updateNightMode();
 
+
+
+function renderShortcuts(){
+  const list=$('quick-links');
+  list.replaceChildren(...config.shortcuts.map(([name,url],index)=>{
+    const link=document.createElement('a');
+    const opensCalendar=index===0&&calendarUrl(config.calendar);
+    link.href=opensCalendar?'#':(safeUrl(url)||'#');
+    if(!opensCalendar){link.target='_blank';link.rel='noopener noreferrer';}
+    else{link.addEventListener('click',event=>{event.preventDefault();$('calendar-card').hidden=false;});}
+    link.innerHTML=`<span>${String(index+1).padStart(2,'0')}</span>${name||'Acceso'} <b>↗</b>`;
+    return link;
+  }));
+}
+renderShortcuts();
