@@ -14,6 +14,10 @@ El reloj usa la hora y zona horaria del dispositivo e incluye segundos. El clima
 
 La versión local permite usar el reloj sin conexión; el clima y las recetas requieren conexión. Pantalla completa depende del navegador y no impide por sí sola que Android apague la pantalla.
 
+## PIN de la casa
+
+Las luces y la estufa (`/api/lights`) quedan protegidas con la variable de entorno `PANEL_PIN` en Vercel. Ingresa el mismo PIN en Ajustes → "PIN de la casa"; se guarda solo en ese dispositivo y no se incluye en las copias de respaldo. Si `PANEL_PIN` no está definida, el control queda abierto.
+
 ## Próximos pasos
 
 1. Probar el tamaño del reloj y los botones en el Moto G34, en horizontal.
