@@ -7,8 +7,10 @@ Dashboard doméstico para usar un Moto G34 como pantalla de casa. No requiere de
 Abre `public/index.html` en un navegador y mantén juntos los tres archivos de esa carpeta.
 
 - `public/index.html`: estructura, textos y direcciones de los accesos rápidos.
-- `public/styles.css`: colores, tamaños y distribución horizontal o vertical.
-- `public/app.js`: reloj, clima, pronóstico, recetas y pantalla completa.
+- `public/styles.css`: colores, tamaños y distribución. Cada tema define sus colores como variables CSS (`--accent`, `--wx-a`, etc.) en `body[data-theme="…"]`.
+- `public/app.js`: reloj, clima, accesos, luces, Spotify, ajustes y pantalla completa.
+- `public/gestures.js`: control con la mano usando la cámara.
+- `api/lights.js` y `api/spotify/`: funciones de Vercel para Tuya y Spotify.
 
 El reloj usa la hora y zona horaria del dispositivo e incluye segundos. El clima se actualiza automáticamente para Santiago de Chile, muestra un pronóstico de tres días y puede refrescarse con el botón del encabezado. Calendario, Keep, YouTube y Mapas abren sus páginas y requieren conexión; pueden pedir inicio de sesión.
 
